@@ -1,0 +1,94 @@
+# Basic SQL queries
+
+1)***SELECT***
+    SELECT p.PersonId,
+
+       p.FirstName,  
+
+       p.LastName,
+
+       c.Name
+
+    FROM Person AS p;
+
+2)***SELECT with keywords FROM, WHERE, ORDER BY, GROUP BY, and HAVING ***
+
+  SELECT p.PersonId,
+
+       p.FirstName,
+
+       p.LastName,
+
+       p.Name,
+
+      FROM Person AS p
+    
+     WHERE p.Name = 'New York';
+
+3)***SELECT with AND or OR within the WHERE statement***
+
+    SELECT p.PersonId,
+
+       p.FirstName,
+
+       p.LastName,
+
+       p.Name
+
+      FROM Person AS p
+
+    WHERE p.Name = 'New York'
+
+    OR p.Name = 'Chicago';
+
+4)***JOIN***
+
+    SELECT p.PersonId,
+
+       p.FirstName,
+
+       p.LastName,
+
+       c.Name
+
+    FROM Person AS p
+  
+    JOIN City AS c
+
+    ON p.CityId = c.CityId;
+
+5)***CASE***
+
+    SELECT p.PersonId,
+
+       p.FirstName,
+
+       p.LastName,
+
+       CASE
+
+         WHEN p.Age < 18 THEN 'below 18'
+
+         WHEN p.Age >= 18 THEN '18 or more'
+
+       END AS Age
+
+    FROM Person AS p;
+
+6)***VALUES***
+
+    INSERT INTO Car(id_car, name, year) VALUES
+
+7)***UPDATE***
+
+    UPDATE Car
+    
+    SET year = 2012
+    
+    WHERE Name = 'Audi';
+
+8)***DELETE***
+
+    DELETE FROM Car
+    
+    WHERE Name = 'Audi';
