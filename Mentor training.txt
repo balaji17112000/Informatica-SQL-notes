@@ -1,0 +1,83 @@
+Designer:
+	Source Analyser - Define source
+	Source Target - Define Target
+	Task developer - Reuse and edit one transformation
+	Mapplet designer - create set of transformations (that can be used in mapping designer)
+	Mapping Designer - Create mappings
+
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
+Workflow :
+	Task developer - create a workflow can't run here
+	Worklet designer - create multiple workflows can't run here
+	workflow designer - create & run workflow
+
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
+TRANSFORMATIONS:
+
+1)Expression transformation - Its a passive transformation. Expression like Concat, IIF, Decode, Trim can be applied for the coulmns in the expression coulmn.
+
+2)Source Qalifier - Override sql quiries and do simple override quries & apply changes to the data( like distict etc)
+
+3)Union - To merge Data from diff input source, All coulmn should be in exact match and in same order.It does not remove duplicate. 
+
+4)Joiner - Joins the input on the condition. contains Master and Detail table(Master should be less records).(Inner Join, Master outer Join,Detail outer join, full outer join)
+
+5)Filter - One filter condition. Do not have default storage values.
+
+6)Router - Multiple filter conditions. Non filter condtion value is stored in default storage .
+
+7)Rank	 - Rank for each row is assigned on the condtion. groupby can be used.('N' -Top/bottom values can be given to retrive 'N' top/bottom datas)
+
+8)Aggregator - will have some functions like Avg count sum first last min max stddev median. Sorted input will increase the performance in session level, but the datas should be sorted previously. ( It will have Minimum Rows)
+
+9)Sorter - Will sort the records according to the condition and distict can be used.
+
+10)Lookup (Connected & unconnected)
+
+11)Update strategy -to determine whether to maintain all the historic data or just the most recent changes.
+	Insert DD_INSERT 0
+	Update DD_UPDATE 1
+	Delete DD_DELETE 2
+	Reject DD_REJECT 3
+
+12) Normalizer : It will make columns to rows. i.e minimizing columns (opp to Aggregator)
+
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+ 
+
+File repository / Indirect file loading (Store file names in one file and connecting it with one mapping to target)
+
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+ 
+
+SCD type 1 (Stores current Data and not storing historic data)
+SCD type 2 (Stores current and all historic Data)
+SCD type 3 (Stores current Data & previous data)
+
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
+
+Mapping paramater(Constant)
+Mapping variable(can change in session level). Flow - Define a variable/parameter (mapping-> parameter and variable) -> create the param file add the default syntax([Foldername.WF:WorkflowName.ST:SessionName]) and create a variable. Set the param file path in session/ workflow properties. use the variable/ parameter by $$variable / $$parameter
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+In task Manager Workflow:
+
+Scheduler - Will schedule the workflow to start @particular time & date (Edit workflow -> scheduler tab -> make changes)
+
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
+Task
+
+ Reusable Tasks:
+	 Command - use command and execute commands,
+	 session - create session for mappings created, 
+	 email - email can be set over the suucess/ failure of tasks(User_Name,Subject,Email_Text,attachments(%a<file path>) 
+ Non-reusable tasks: 
+	 Assignment - Assign/Passing a variable to Session from inbuilt variable (or) another session using Pre Session Variable/Post session variable,
+         Decision
+------ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
+Pre/Post Sql Commands (write in source qualifier/session level )
